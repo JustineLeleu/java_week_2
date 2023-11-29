@@ -1,5 +1,4 @@
-import java.util.Arrays;
-import java.util.Scanner;
+import javax.swing.*;
 
 public class Challenge1
 {
@@ -19,9 +18,9 @@ public class Challenge1
         }
     }
 
-    public static float calculateSurface(float a, float b)
+    public static float calculateSurface(float l, float w, float lConversion, float wConversion)
     {
-        return a * b;
+        return (float) (Math.round(((l * lConversion) * ( w * wConversion)) * 100.0) / 100.0);
     }
 
     public static String getData(String data, boolean numeric)
@@ -40,34 +39,28 @@ public class Challenge1
         return null;
     }
 
-    public static boolean checkData(String value, String measure, Measurement measurement)
-    {
-        return value != null && measure != null && measurement != null;
-    }
-
     public static void main(String[] args)
     {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter length:");
-        String length = scanner.nextLine();
-        System.out.println("Enter width:");
-        String width = scanner.nextLine();
+        String length = JOptionPane.showInputDialog("Enter length:");
+        String width = JOptionPane.showInputDialog("Enter width:");
 
-        System.out.println("length: " + length + " and width: " + width);
-
-        String lValue = getData(length, true);
-        String lMeasurement = getData(length, false);
-        Measurement lMeasure = getMeasurement(lMeasurement);
-
-        String wValue = getData(width, true);
-        String wMeasurement = getData(width, false);
-        Measurement wMeasure = getMeasurement(wMeasurement);
-
-        if (checkData(wValue, wMeasurement, wMeasure) && checkData(lValue, lMeasurement, lMeasure))
+        try
         {
-            System.out.println("OK");
-            float surface = calculateSurface(Float.parseFloat(lValue), Float.parseFloat(wValue));
-            System.out.println("Surface of " + length + " and " + width + " = " + surface);
+            String lValue = getData(length, true);
+            String lMeasurement = getData(length, false);
+            Measurement lMeasure = getMeasurement(lMeasurement);
+
+            String wValue = getData(width, true);
+            String wMeasurement = getData(width, false);
+            Measurement wMeasure = getMeasurement(wMeasurement);
+
+            float surface = calculateSurface(Float.parseFloat(lValue), Float.parseFloat(wValue), lMeasure.conversion, wMeasure.conversion);
+            JFrame f = new JFrame();
+            JOptionPane.showMessageDialog(f,"Surface of " + length + " and " + width + " = " + surface + " m");
+        }
+        catch (NullPointerException e)
+        {
+            System.out.println("Inputs not valid try again");
         }
     }
 }
