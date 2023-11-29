@@ -1,4 +1,7 @@
 import java.io.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,6 +14,7 @@ public class Challenge4
         {
             list = br.lines().skip(1).map(FileLine::new).collect(Collectors.toList());
             list.stream().filter(line -> line.getLine().contains("$")).forEach(line -> line.setLine(convert(line.getValue(), change), convert(line.getCumulative(), change), currency));
+            Collections.reverse(list);
             return list;
         }
         catch (IOException e)
