@@ -17,10 +17,10 @@ public class FileLine
         return this.line;
     }
 
-    public void setLine(String value, String cumulative)
+    public void setLine(String value, String cumulative, char currency)
     {
         String[] temp = this.line.split(",");
-        temp[temp.length - 3] = "€";
+        temp[temp.length - 3] = String.valueOf(currency);
         temp[temp.length - 2] = value;
         temp[temp.length - 1] = cumulative;
         this.line = String.join(",", temp);
