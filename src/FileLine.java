@@ -37,4 +37,15 @@ public class FileLine
         String[] temp = this.line.split(",");
         return temp[temp.length - 1];
     }
+
+    public long getLongValue()
+    {
+        return Long.parseLong(getValue());
+    }
+
+    public String getMonth()
+    {
+        String date = this.line.split(",")[2];
+        return date.split("/")[1];
+    }
 }

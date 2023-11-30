@@ -12,7 +12,11 @@ public class Challenge6
         List<FileLine> list = new ArrayList<>();
         try(InputStream inputFS = new FileInputStream("src/effects-of-covid19-on-trade.csv"); BufferedReader br = new BufferedReader(new InputStreamReader(inputFS)))
         {
-            list = br.lines().skip(1).filter(line -> Objects.equals(line.split(",")[0], "Exports") && Objects.equals(line.split(",")[1], year) && Objects.equals(line.split(",")[4], country) && Objects.equals(line.split(",")[5], "All") && Objects.equals(line.split(",")[6], "All")).map(FileLine::new).collect(Collectors.toList());
+            list = br.lines()
+                    .skip(1)
+                    .filter(line -> Objects.equals(line.split(",")[0], "Exports") && Objects.equals(line.split(",")[1], year) && Objects.equals(line.split(",")[4], country) && Objects.equals(line.split(",")[5], "All") && Objects.equals(line.split(",")[6], "All"))
+                    .map(FileLine::new)
+                    .collect(Collectors.toList());
         }
         catch (IOException e)
         {
@@ -37,7 +41,9 @@ public class Challenge6
         FileLine MaxLine;
         try
         {
-            MaxLine = list.stream().max(Comparator.comparing(FileLine -> Long.parseLong(FileLine.getValue()))).orElseThrow(Exception::new);
+            MaxLine = list.stream()
+                    .max(Comparator.comparing(FileLine -> Long.parseLong(FileLine.getValue())))
+                    .orElseThrow(Exception::new);
         }
         catch (Exception e)
         {

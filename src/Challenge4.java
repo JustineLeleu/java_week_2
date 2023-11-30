@@ -12,9 +12,12 @@ public class Challenge4
         List<FileLine> list;
         try(InputStream inputFS = new FileInputStream("src/effects-of-covid19-on-trade.csv"); BufferedReader br = new BufferedReader(new InputStreamReader(inputFS)))
         {
-            list = br.lines().skip(1).map(FileLine::new).collect(Collectors.toList());
-            list.stream().filter(line -> line.getLine().contains("$")).forEach(line -> line.setLine(convert(line.getValue(), change), convert(line.getCumulative(), change), currency));
-            Collections.reverse(list);
+            list = br.lines()
+                    .skip(1)
+                    .map(FileLine::new)
+                    .collect(Collectors.toList());
+            list.stream()
+                    .filter(line -> line.getLine().contains("$")).forEach(line -> line.setLine(convert(line.getValue(), change), convert(line.getCumulative(), change), currency));
             return list;
         }
         catch (IOException e)

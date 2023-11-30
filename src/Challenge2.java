@@ -10,7 +10,10 @@ public class Challenge2
         List<String> list = new ArrayList<>();
         try(InputStream inputFS = new FileInputStream("src/effects-of-covid19-on-trade.csv"); BufferedReader br = new BufferedReader(new InputStreamReader(inputFS)))
         {
-            list = br.lines().skip(1).map(line -> line.split(",")[index]).collect(Collectors.toList());
+            list = br.lines()
+                    .skip(1)
+                    .map(line -> line.split(",")[index])
+                    .collect(Collectors.toList());
         }
         catch (IOException e)
         {
